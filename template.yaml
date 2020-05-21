@@ -28,18 +28,6 @@ Resources:
     Properties: 
       AccessControl: Private 
       BucketName: !Sub ${ProjectName}-prod-bucket
-
-  S3BucketPolicy: 
-    Type: AWS::S3::BucketPolicy
-    Properties:
-      Bucket: !Ref S3ProdBucket
-      PolicyDocument:
-        Statement:
-          -
-            Action:
-              - s3:GetObject
-            Effect: Allow
-            Resource: '*'
   
   S3BucketPolicy: 
     Type: AWS::S3::BucketPolicy
@@ -59,8 +47,6 @@ Resources:
     Type: AWS::CloudFront::Distribution
     Properties:
       DistributionConfig:
-        #Aliases:
-        #  - !Ref DomainName
         DefaultCacheBehavior:
           Compress: true
           ForwardedValues:
