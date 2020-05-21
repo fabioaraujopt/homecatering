@@ -1,0 +1,87 @@
+
+Description: Creates resources for a static webstie
+
+Parameters:
+  ProjectName:
+    Type: String
+    Description: The project name.
+    Default: instalargas1234
+
+Resources:
+  CloudFrontOriginAccessIdentity:
+    Type: AWS::CloudFront::CloudFrontOriginAccessIdentity
+    Properties:
+      CloudFrontOriginAccessIdentityConfig:
+        Comment: !Sub 'CloudFront OAI for ${ProjectName}'
+  
+  S3StagingBucket:
+    Type: AWS::S3::Bucket
+    Properties: 
+      AccessControl: Private 
+      BucketName: !Sub ${ProjectName}-staging-bucket
+      WebsiteConfiguration:
+        IndexDocument: index.html
+
+  
+  S3ProdBucket:
+    Type: AWS::S3::Bucket
+    Properties: 
+      AccessControl: Private 
+      BucketName: !Sub ${ProjectName}-prod-bucket
+
+  S3BucketPolicy: 
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref S3ProdBucket
+      PolicyDocument:
+        Statement:
+          -
+            Action:
+              - s3:GetObject
+            Effect: Allow
+            Resource: '*'
+  
+  S3BucketPolicy: 
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref S3ProdBucket
+      PolicyDocument:
+        Statement:
+          -
+            Action:
+              - s3:GetObject
+            Effect: Allow
+            Resource: !Join [ "", [ "arn:aws:s3:::", !Ref S3ProdBucket, "/*" ] ]
+            Principal:
+              CanonicalUser: !GetAtt CloudFrontOriginAccessIdentity.S3CanonicalUserId
+  
+  CloudFrontDistribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        #Aliases:
+        #  - !Ref DomainName
+        DefaultCacheBehavior:
+          Compress: true
+          ForwardedValues:
+            QueryString: false
+          TargetOriginId: !Sub ${ProjectName}-prod-bucket
+          ViewerProtocolPolicy: allow-all
+        DefaultRootObject: /index.html
+        CustomErrorResponses:
+          - ErrorCachingMinTTL: 300
+            ErrorCode: 403
+            ResponseCode: 200
+            ResponsePagePath: /index.html
+          - ErrorCachingMinTTL: 300
+            ErrorCode: 404
+            ResponseCode: 200
+            ResponsePagePath: /index.html
+        Enabled: true
+        HttpVersion: http2
+        Origins:
+          - DomainName: !GetAtt  S3ProdBucket.DomainName
+            Id: !Sub ${ProjectName}-prod-bucket
+            S3OriginConfig:
+              OriginAccessIdentity:
+                !Join ['', ['origin-access-identity/cloudfront/', !Ref CloudFrontOriginAccessIdentity]]
