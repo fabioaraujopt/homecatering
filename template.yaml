@@ -14,15 +14,6 @@ Resources:
       CloudFrontOriginAccessIdentityConfig:
         Comment: !Sub 'CloudFront OAI for ${ProjectName}'
   
-  S3StagingBucket:
-    Type: AWS::S3::Bucket
-    Properties: 
-      AccessControl: Private 
-      BucketName: !Sub ${ProjectName}-staging-bucket
-      WebsiteConfiguration:
-        IndexDocument: index.html
-
-  
   S3ProdBucket:
     Type: AWS::S3::Bucket
     Properties: 

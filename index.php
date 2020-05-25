@@ -58,14 +58,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     border-right: 1px solid #edf6ff;
 			    }
 			</style>
+			<script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
 		</head>
-		<body>	
+		<body>
+	
 			<header id="header">
 				<div class="header-top">
 					<div class="container">
 				  		<div class="row justify-content-center">
 						      <div id="logo">
-						        <a href="index.html"><img src="img/mainLogo.png" alt="" title="" style="width:18em;" /></a>
+						        <img src="img/mainLogo.png" alt="" title="" style="width:18em;"/>
 						      </div>
 				  		</div>			  					
 					</div>
@@ -91,17 +93,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 				<div class="container">
 					<div class="row fullscreen align-items-center justify-content-between">
 						<div class="col-lg-12 banner-content" style="margin-top:15em;">
-							<h6 class="text-white">Eventos Personalizados</h6>
+							<h6 class="text-white" >Eventos Personalizados</h6>
 							<h1 class="text-white">Catering</h1>
-							<p class="text-white">
-								<span class="font-weight-bold">A Home Catering - As Marias</span>  planeia e organiza almoços, jantares, brunches, festas infantil,cocktails e outras comemorações em sua casa.
+							<p class="text-white" contentEditable="true">
+								<span class="font-weight-bold" contentEditable="true">A Home Catering - As Marias</span>  planeia e organiza almoços, jantares, brunches, festas infantil,cocktails e outras comemorações em sua casa.
 								Personalize o evento as suas necessidades!
 								Personalize o evento as suas necessidades!<br>
 							</p>
 							<p>
 							<a href="tel:+351938526877"><img style="margin-bottom: 15px;
-    transform: rotate(20deg);width:2em;" src="../menu_imgs/chamada.png"><span class="text-white" style="font-size: 30px;" >964164097</span></p></a>
-							<a href="#reservation-area" class="primary-btn text-uppercase">Pedir Orçamento</a>
+    transform: rotate(20deg);width:2em;" src="../menu_imgs/chamada.png"><span class="text-white" style="font-size: 30px;" contentEditable="true">964164097</span></p></a>
+							<a href="#reservation-area" class="primary-btn text-uppercase" contentEditable="true" contentEditable="true">Pedir Orçamento</a>
 						</div>
 					</div>
 				</div>					
@@ -114,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 					<div class="row align-items-center">
 						<div class="col-lg-6 home-about-left">
 							<h1>Sobre Nós</h1>
-							<p style="text-align:justify;">
+							<p style="text-align:justify;" contentEditable="true">
 								Somos uma equipa experiente na realização de catering em ocasiões especiais. Comemore a sua data especial com uma equipa inovadora que tem raízes na tradiçao.
 							</p>
 						</div>
@@ -152,7 +154,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 						<div class="menu-content pb-70 col-lg-8">
 							<div class="title text-center">
 								<h1 class="mb-10">Galeria</h1>
-								<p>Alguns dos nossos pratos. Delicie-se...</p>
+								<p contentEditable="true">Alguns dos nossos pratos. Delicie-se...</p>
 							</div>
 						</div>
 					</div>
@@ -662,12 +664,4 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			</script>
 
 		</body>
-
-		<!-- Development -->
-		
-
-		<!-- End of Development -->
-
 	</html>
-
-	
